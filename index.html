@@ -52,6 +52,9 @@
         main h2 {
             color: #ff7e5f;
         }
+        h3 {
+            color: #ff7e5f; /* Đồng bộ màu với h2 */
+        }
         /* Footer */
         footer {
             text-align: center;
@@ -94,9 +97,9 @@
         <h1>🌐 Website Học Tập Của Nhóm</h1>
         <!-- Menu điều hướng -->
         <nav>
-            <a onclick="showPage('home')">Trang chủ</a>
-            <a onclick="showPage('profile')">Tiểu sử</a>
-            <a onclick="showPage('online')">Học online</a>
+            <a href="#" id="homeLink">Trang chủ</a>
+            <a href="#" id="profileLink">Tiểu sử</a>
+            <a href="#" id="onlineLink">Tài liệu</a>
         </nav>
     </header>
 
@@ -110,6 +113,7 @@
     </footer>
 
     <script>
+        // Hàm để hiển thị các trang khác nhau
         function showPage(page) {
             let content = document.getElementById('content');
 
@@ -117,18 +121,18 @@
             if (page === 'home') {
                 content.innerHTML = `
                     <h2>Chào mừng đến với Website</h2>
-                    <p>Đây là nơi bạn có thể xem tiểu sử và tham gia các khóa học online.</p>
+                    <p>Đây là nơi bạn có thể xem tiểu sử và truy cập tài liệu học liên quan đến các môn.</p>
 
-                    <!-- HÀNG 3 ẢNH - thay link ảnh ở src="" -->
+                    <!-- HÀNG 3 ẢNH -->
                     <div class="image-row">
                         <img src="https://www.galeriemichael.com/wp-content/uploads/2025/07/hinh-nen-sach.jpg" alt="Ảnh 1">
-                        <img src="https://scontent.fdad1-3.fna.fbcdn.net/v/t1.15752-9/494361910_1012004744407567_7661438022553987715_n.png?_nc_cat=111&ccb=1-7&_nc_sid=9f807c&_nc_ohc=aipOf3v3NDEQ7kNvwGQDqv9&_nc_oc=AdmcIimBGmLlxWxT076LtefaZSnShqQKZ19ftQjS4cO-EMfTkdcOm_1vYWbiS6lwSSE&_nc_zt=23&_nc_ht=scontent.fdad1-3.fna&oh=03_Q7cD3AFQXfc7LTjb0azCXh0jH8EJUYxXWVe3AV_WbYYTMz4Qag&oe=68BD4682" alt="Ảnh 2">
-                        <img src="https://via.placeholder.com/300x200" alt="Ảnh 3">
+                        <img src="https://cdn2.tuoitre.vn/471584752817336320/2024/3/22/8857720-17110949064572087082205.jpg" alt="Ảnh 2">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKK9z0R3-jeGd85IXN8ks10QaAq7FgMp--Ww&s" alt="Ảnh 3">
                     </div>
 
-                    <!-- Link thêm (VD: nhóm Facebook, trang khác...) -->
+                    <!-- Link thêm -->
                     <p style="margin-top:15px;">
-                        <a href="https://example.com" target="_blank">🔗 Xem thêm tài liệu học tập</a>
+                        <a href="https://example.com" target="_blank">🔗 zalo nhóm</a>
                     </p>
                 `;
             }
@@ -138,6 +142,11 @@
                 content.innerHTML = `
                     <h2>Giới thiệu</h2>
                     <p>Đây là web để mọi người cùng học và chia sẻ link học cho nhau.</p>
+                    <h3>Thắc mắc?</h3>
+                    <p>Nếu bạn có bất kỳ câu hỏi nào hoặc cần giúp đỡ, vui lòng liên hệ với chúng tôi qua email: 
+                        <a href="https://mail.google.com/mail/?tab=rm&ogbl">mthang2k8@gmail.com</a> hoặc 
+                        <a href="https://www.facebook.com/profile.php?id=61557409568635" target="_blank">Facebook</a>.
+                    </p>
                 `;
             }
 
@@ -161,6 +170,11 @@
                 `;
             }
         }
+
+        // Thêm event listeners cho các liên kết
+        document.getElementById('homeLink').addEventListener('click', function() { showPage('home'); });
+        document.getElementById('profileLink').addEventListener('click', function() { showPage('profile'); });
+        document.getElementById('onlineLink').addEventListener('click', function() { showPage('online'); });
 
         // Mặc định mở trang chủ
         showPage('home');
