@@ -2,24 +2,364 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>poly-ASM_gd</title>
+    <title>Website Học Tập</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #1a1a2e;
+            color: #e0e0e0;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            background-image: url('https://scontent.fdad1-2.fna.fbcdn.net/v/t39.30808-6/528863044_122214127562246985_2480463898682842451_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=127cfc&_nc_ohc=unjz6E9O2kUQ7kNvwEQlzo3&_nc_oc=AdnYKzLJlFkULcLou7LpIBSKWwn7ffiULvy0ecoF5OJDjT_f9J24j2aCM9NMxjbcTbA&_nc_zt=23&_nc_ht=scontent.fdad1-2.fna&_nc_gid=J0ywNWZWjsupdaKtYgqDWQ&oh=00_AfUxWW8jwxA9hoE3v1iNCk7qhBmP1V4Bl7Er9-UDEkE6Gg&oe=689C573D');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .header {
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .header-content-wrapper {
+            background: rgba(0, 0, 0, 0.4); /* Màu đen trong suốt */
+            padding: 20px;
+            margin: 0 auto;
+            border-radius: 0;
+            width: 100%;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin: 0 0 10px 0;
+            color: #ffffff;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .navbar {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .navbar a {
+            color: #b3b3e6;
+            text-decoration: none;
+            font-size: 1.2em;
+            margin: 0 15px;
+            padding: 10px 15px;
+            border-radius: 8px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .navbar a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+
+        .navbar a.active {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .content-wrapper {
+            margin: 30px auto;
+            width: 80%;
+            max-width: 900px;
+            padding: 2px;
+            background-color: #000;
+            border-radius: 22px;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.5);
+        }
+
+        #content {
+            background-image: url('https://scontent.fdad1-2.fna.fbcdn.net/v/t39.30808-6/528863044_122214127562246985_2480463898682842451_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=127cfc&_nc_ohc=unjz6E9O2kUQ7kNvwEQlzo3&_nc_oc=AdnYKzLJlFkULcLou7LpIBSKWwn7ffiULvy0ecoF5OJDjT_f9J24j2aCM9NMxjbcTbA&_nc_zt=23&_nc_ht=scontent.fdad1-2.fna&_nc_gid=J0ywNWZWjsupdaKtYgqDWQ&oh=00_AfUxWW8jwxA9hoE3v1iNCk7qhBmP1V4Bl7Er9-UDEkE6Gg&oe=689C573D');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: rgba(255, 255, 255, 0.95);
+            
+            color: #333;
+            padding: 40px;
+            border-radius: 20px;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        .homepage-content {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .homepage-content .text-container {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .homepage-content img {
+            width: 40%;
+            max-width: 300px;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        #content h2 {
+            color: #1a1a2e;
+            font-size: 2em;
+            border-bottom: 2px solid #5a5a8e;
+            padding-bottom: 10px;
+        }
+
+        #content h3 {
+            color: #333;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-top: 25px;
+        }
+
+        .link-list {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 20px;
+        }
+        .link-list li {
+            margin: 12px 0;
+            background-color: #f0f0f0;
+            padding: 12px 20px;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+        }
+        .link-list li:hover {
+            background-color: #e6e6e6;
+        }
+        .link-list a {
+            color: #1a1a2e;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .link-list a:hover {
+            text-decoration: underline;
+        }
+        
+        /* CSS cho chức năng bật/tắt */
+        .collapsible-section {
+            margin-bottom: 20px;
+        }
+
+        .collapsible-header {
+            background-color: #f0f0f0;
+            color: #1a1a2e;
+            cursor: pointer;
+            padding: 15px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 1.2em;
+            font-weight: bold;
+            transition: 0.4s;
+            border-radius: 8px;
+            margin-bottom: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .collapsible-header:hover {
+            background-color: #e6e6e6;
+        }
+        
+        .collapsible-header.active {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        .collapsible-content {
+            padding: 0 18px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+            background-color: #f9f9f9;
+            border-radius: 0 0 8px 8px;
+            border-top: none;
+        }
+    </style>
 </head>
 <body>
-    <h1>
-        Nguyễn Minh Thắng - depzai
-    </h1>
-
-    <div id="box">
-        <h2>-thangdepzaiso1vn</h2>
-        <a href="" target="_blank">
-            Đây là fb của của anh nha bé iu
-        </a>
+    <div class="header">
+        <div class="header-content-wrapper">
+            <h1>📜 Website Học Tập Của Nhóm</h1>
+            <div class="navbar">
+                <a href="#" id="homeLink"><span role="img" aria-label="home">🏠</span> Trang chủ</a>
+                <a href="#" id="profileLink"><span role="img" aria-label="profile">🧑‍💻</span> Tiểu sử</a>
+                <a href="#" id="onlineLink"><span role="img" aria-label="online">📚</span> Tài liệu</a>
+            </div>
+        </div>
     </div>
 
-    <div id="img">
-        <img src="https://scontent.fdad1-2.fna.fbcdn.net/v/t39.30808-6/498193066_122199545954246985_7742372949437183323_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=a5f93a&_nc_ohc=rli6uOz348IQ7kNvwHbAN2d&_nc_oc=AdmnrMpEkn6Rvsdv6EDv5o67D0npPhgI0R5NJ6K2neoHec1NPlNwMT6VvfcKZ0JFEA4&_nc_zt=23&_nc_ht=scontent.fdad1-2.fna&_nc_gid=6tMwETKo1iXzwm9m37qIsg&oh=00_AfWlE6yRw-XwnUG_o6gvpnpv0egOjNNJaTm6W65zc8j87Q&oe=689A25E6"  alt="hình minh họa" width="1000">
+    <div class="content-wrapper">
+        <main id="content">
+            </main>
     </div>
+
+    <script>
+        function showPage(page) {
+            let content = document.getElementById('content');
+            let links = document.querySelectorAll('.navbar a');
+
+            links.forEach(link => link.classList.remove('active'));
+
+            if (page === 'home') {
+                document.getElementById('homeLink').classList.add('active');
+                content.innerHTML = `
+                    <div class="homepage-content">
+                        <div class="text-container">
+                            <h2>Chào mừng đến với Website</h2>
+                            <p><strong>Đây là nơi bạn có thể xem tiểu sử và truy cập tài liệu học liên quan đến các môn.</strong></p>
+                            <a href="https://zalo.me/g/dkjczk525" target="_blank">zalo nhóm</a>
+                        </div>
+                    </div>
+                `;
+            }
+
+            if (page === 'profile') {
+                document.getElementById('profileLink').classList.add('active');
+                content.innerHTML = `
+                    <h2>Giới thiệu</h2>
+                    <p><strong>Đây là web để mọi người cùng học và chia sẻ link học cho nhau.</strong></p>
+                    <h3>Thắc mắc?</h3>
+                    <p>Nếu bạn có bất kỳ câu hỏi nào hoặc cần giúp đỡ, vui lòng liên hệ với chúng tôi qua email:
+                        <a href="https://mail.google.com/mail/?tab=rm&ogbl">mthang2k8@gmail.com</a> hoặc
+                        <a href="https://www.facebook.com/profile.php?id=61557409568635" target="_blank">Facebook</a>.
+                    </p>
+                `;
+            }
+
+            if (page === 'online') {
+                document.getElementById('onlineLink').classList.add('active');
+                content.innerHTML = `
+                    <h2>Khóa học online</h2>
+                    <p><strong>Bạn có thể tham gia các khóa học online dưới đây:</strong></p>
+
+                    <div class="collapsible-section">
+                        <h3 class="collapsible-header">Tự học lớp 10</h3>
+                        <ul class="link-list collapsible-content">
+                            <li><a href="https://www.google.com/url?q=https://drive.google.com/drive/folders/1uJ0XPQT5eo2r8oYfV5Tsfplz8tyJHb0x?usp%3Ddrive_link&sa=D&source=editors&ust=1754667510888690&usg=AOvVaw3SZnnUtjChbD2okB0UeGCt" target="_blank">Tự học Vật Lý lớp 10 tập 1</a></li>
+                            <li><a href="https://www.google.com/url?q=https://drive.google.com/drive/folders/13fbtqgsbnyBhQReqpuXuCRypw_Dw0zwe?usp%3Dsharing&sa=D&source=editors&ust=1754667510889146&usg=AOvVaw0VbInSuQxMvRNZtoUCcKXF" target="_blank">Tự học Vật Lý lớp 10 tập 2</a></li>
+                            <li><a href="https://www.google.com/url?q=https://drive.google.com/drive/folders/1NzP8L0Mt-pTYHMfpKEIfxr2dUcHBtUsE?usp%3Ddrive_link&sa=D&source=editors&ust=1754667510890980&usg=AOvVaw0Vgeacxe0k9aNKS755GNs7" target="_blank">Tự học Hóa Học lớp 10 tập 1</a></li>
+                            <li><a href="https://www.google.com/url?q=https://drive.google.com/drive/folders/1XgEtqeNhayA1zPBbkt9W85Ur6buBNFSU?usp%3Dsharing&sa=D&source=editors&ust=1754667510891346&usg=AOvVaw3Gfjc10upaiC-F7QAjME_I" target="_blank">Tự học Hóa Học lớp 10 tập 2</a></li>
+                            <li><a href="https://www.google.com/url?q=https://drive.google.com/drive/folders/1fDYI78nU0eVR6TmpX36bOeprEete5Hgk?usp%3Dsharing&sa=D&source=editors&ust=1754667510889515&usg=AOvVaw11_TZF_g3J4gi_5O2cPJvW" target="_blank">Tự học Sinh Học lớp 10 tập 1</a></li>
+                            <li><a href="https://www.google.com/url?q=https://drive.google.com/drive/folders/12stHu0Ng4qS8aQcpmJ0Q_uuNDhhb1cBv?usp%3Ddrive_link&sa=D&source=editors&ust=1754667510889925&usg=AOvVaw0OnsSQrmSYSqjsHGk96ePz" target="_blank">Tự học Sinh Học lớp 10 tập 2</a></li>
+                            <li><a href="https://www.google.com/url?q=https://drive.google.com/drive/folders/1168Se8IBL6BVBXfkPWX2GRj71fEMWGHX?usp%3Ddrive_link&sa=D&source=editors&ust=1754667510890167&usg=AOvVaw3mDfwIskfC82hY_LGs0VbD" target="_blank">Tự học Toán lớp 10 tập 1</a></li>
+                            <li><a href="https://www.google.com/url?q=https://drive.google.com/drive/folders/1GGJsGtx-fdX0dVNfO31W8KxuM5MLsG8L?usp%3Ddrive_link&sa=D&source=editors&ust=1754667510890612&usg=AOvVaw3AIZvulGuPGjIvWYnEvpmD" target="_blank">Tự học Toán lớp 10 tập 2</a></li>
+                            <li><a href="https://www.google.com/url?q=https://drive.google.com/drive/folders/1W5WPyjNn_m4elNJta8mEvVd3vbMAat2m?usp%3Dsharing&sa=D&source=editors&ust=1754667510891679&usg=AOvVaw1b6UukoCY6v9qhPoWwegyI" target="_blank">Sổ tay kiến thức trong tâm Hóa 10</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="collapsible-section">
+                        <h3 class="collapsible-header">Tự học lớp 11</h3>
+                        <ul class="link-list collapsible-content">
+                            <li><a href="https://www.google.com/url?q=https://drive.google.com/drive/folders/1siLLB-pVAELtKJjENSuIjriUSL0E-TRO?usp%3Dsharing&sa=D&source=editors&ust=1754667510892025&usg=AOvVaw3a9qXVTpbdHhH_-QP2C6oQ" target="_blank">Tự học Sinh Học lớp 11 tập 1 + tập 2</a></li>
+                            <li><a href="https://www.google.com/url?q=https://drive.google.com/drive/folders/1p7wAdiE5sD1T0MLP1y5cCz6Fc6z4g-Fb?usp%3Dsharing&sa=D&source=editors&ust=1754667510892388&usg=AOvVaw3UQoEN8dskaMNCFzGzOJTe" target="_blank">Tự học Hóa Học lớp 11 tập 1</a></li>
+                            <li><a href="https://www.google.com/url?q=https://drive.google.com/drive/folders/1qWks097TU-AltOS4bfrtkPOlAIq6BAZu?usp%3Ddrive_link&sa=D&source=editors&ust=1754667510892594&usg=AOvVaw1esaHtD6b7Exm4fFC4_y0R" target="_blank">Tự học Hóa Học lớp 11 tập 2</a></li>
+                            <li><a href="https://www.google.com/url?q=https://drive.google.com/drive/folders/1ZwcTETupyMAzEiHSZw26oYkktRknv01O?usp%3Ddrive_link&sa=D&source=editors&ust=1754667510892764&usg=AOvVaw1LYEP_dlWfZcFcD7ALTt_a" target="_blank">Tự học Vật Lý lớp 11 tập 1</a></li>
+                            <li><a href="https://www.google.com/url?q=https://drive.google.com/drive/folders/1xL6LsUIAOrMAeJfooJhjF4eJODXLeUCY?usp%3Ddrive_link&sa=D&source=editors&ust=1754667510892931&usg=AOvVaw0ahFcjyP4yAnJDELlASGvW" target="_blank">Tự học Vật Lý lớp 11 tập 2</a></li>
+                            <li><a href="https://www.google.com/url?q=https://drive.google.com/drive/u/1/folders/1QBu-dgGNTV-9ewkLN_zVbZhF7Dnwtwnf?dmr%3D1%26ec%3Dwgc-drive-globalnav-goto&sa=D&source=editors&ust=1754667510893094&usg=AOvVaw2zQ5FNn-oIsGeYyEeRuMkn" target="_blank">Tự học Toán lớp 11 tập 1</a></li>
+                            <li><a href="https://www.google.com/url?q=https://drive.google.com/drive/folders/1iLd9s-Jk9XNYBLfw4x8qjEyMnh9HNv7K?usp%3Ddrive_link&sa=D&source=editors&ust=1754667510893263&usg=AOvVaw1XZ_DpnssG_DflpHmcF4sR" target="_blank">Tự học Toán lớp 11 tập 2</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="collapsible-section">
+                        <h3 class="collapsible-header">Tổng ôn lớp 12</h3>
+                        <ul class="link-list collapsible-content">
+                            <li><a href="https://www.google.com/url?q=https://www.google.com/url?q%3Dhttps://drive.google.com/drive/folders/1DvhxLx5XxncZe1QweAwbYTjrPUak3ys-?usp%253Ddrive_link%26sa%3DD%26source%3Deditors%26ust%3D1729329535680544%26usg%3DAOvVaw2Ny49MpNioaRTfnL4MnuCa&sa=D&source=editors&ust=1754667510893577&usg=AOvVaw3oRmx2uwK1LGaek01eX8IV" target="_blank">Tổng ôn Toán lớp 12 tập 1</a></li>
+                            <li><a href="https://www.google.com/url?q=https://www.google.com/url?q%3Dhttps://drive.google.com/drive/folders/1-gWGrr8jeoVG0L99VKUJX_OMkX6ZIXXz?usp%253Dsharing%26sa%3DD%26source%3Deditors%26ust%3D1729329535681055%26usg%3DAOvVaw2DIlJxn7SOIq4swWCUgBZf&sa=D&source=editors&ust=1754667510893835&usg=AOvVaw0poSCpsibyxx8bCjnCd845" target="_blank">Tổng ôn Toán lớp 12 tập 2</a></li>
+                            <li><a href="https://www.google.com/url?q=https://www.google.com/url?q%3Dhttps://drive.google.com/drive/folders/1Ec9RlaA8OJU061Zc8q8ysH8Zy3mBHSgq?usp%253Dsharing%26sa%3DD%26source%3Deditors%26ust%3D1729329535681515%26usg%3DAOvVaw06d5ezGNFPmxkJQ2xt-yzm&sa=D&source=editors&ust=1754667510894057&usg=AOvVaw0b5WL7kZKAQLZVSDluIEmQ" target="_blank">Sổ tay công thức toán 12</a></li>
+                            <li><a href="https://www.google.com/url?q=https://www.google.com/url?q%3Dhttps://drive.google.com/drive/folders/1PEQUenlg6KJeV5c1zu6soK6g7xYoVa3H?usp%253Ddrive_link%26sa%3DD%26source%3Deditors%26ust%3D1729329535681970%26usg%3DAOvVaw1q1RnuboYG2guzEoylBFJB&sa=D&source=editors&ust=1754667510894264&usg=AOvVaw03WVTm05_WrAZnHr4nPDNB" target="_blank">Tổng ôn Sinh Học lớp 12 tập 1</a></li>
+                            <li><a href="https://www.google.com/url?q=https://www.google.com/url?q%3Dhttps://drive.google.com/drive/folders/1PEQUenlg6KJeV5c1zu6soK6g7xYoVa3H?usp%253Ddrive_link%26sa%3DD%26source%3Deditors%26ust%3D1729329535682421%26usg%3DAOvVaw05_Uz-doiXVKzV7khkz2B3&sa=D&source=editors&ust=1754667510894481&usg=AOvVaw10zhQgTTY7gDuMfFG6atJW" target="_blank">Tổng ôn Sinh Học lớp 12 tập 2</a></li>
+                            <li><a href="https://www.google.com/url?q=https://www.google.com/url?q%3Dhttps://drive.google.com/drive/folders/1c9wK9HXC1EtNPJLXB0sjapQgbEVXRN_y?usp%253Ddrive_link%26sa%3DD%26source%3Deditors%26ust%3D1729329535685228%26usg%3DAOvVaw0Cy3rD7KQwWMUjQkC-dThr&sa=D&source=editors&ust=1754667510895864&usg=AOvVaw2k_8AAmBgJdwQ2tHzrIZI1" target="_blank">Tổng ôn Hóa Học lớp 12 tập 1</a></li>
+                            <li><a href="https://www.google.com/url?q=https://drive.google.com/drive/folders/19RRUf4piVZpyb7LnCdZYYCO7vYYQC58p?usp%3Ddrive_link&sa=D&source=editors&ust=1754667510896043&usg=AOvVaw0HDUr-QvScEzetIRwfc3mE" target="_blank">Tổng ôn Hóa Học lớp 12 tập 2</a></li>
+                            <li><a href="https://www.google.com/url?q=https://www.google.com/url?q%3Dhttps://drive.google.com/drive/folders/1dHR06v0cHnTIPFZHVaGqcXNVEjwQ7agC?usp%253Ddrive_link%26sa%3DD%26source%3Deditors%26ust%3D1729329535682882%26usg%3DAOvVaw344wd09dBq9_xgyV0PGdsn&sa=D&source=editors&ust=1754667510894695&usg=AOvVaw2h3OexFiewuTuePrLNr4vd" target="_blank">Tổng ôn Vật Lý lớp 12 tập 1</a></li>
+                            <li><a href="https://www.google.com/url?q=https://drive.google.com/drive/folders/1GQJpekklhkejn_nnn2CoXA-iREVBr-fc?usp%3Ddrive_link&sa=D&source=editors&ust=1754667510894874&usg=AOvVaw1eckQKeozqs2nF0gKegV5a" target="_blank">Tổng ôn Vật Lý lớp 12 tập 2</a></li>
+                            <li><a href="https://www.google.com/url?q=https://www.google.com/url?q%3Dhttps://drive.google.com/drive/folders/1GMuliEeTkamjQ9fvdLPHJu5bJLJfBIGr?usp%253Dsharing%26sa%3DD%26source%3Deditors%26ust%3D1729329535684477%26usg%3DAOvVaw3gs7K8Fbm6z6bp0kGmH2Au&sa=D&source=editors&ust=1754667510895516&usg=AOvVaw071ITa7h12OVsgYttw1Fv6" target="_blank">Tổng ôn Ngữ Văn lớp 12 tập 1</a></li>
+                            <li><a href="https://www.google.com/url?q=https://www.google.com/url?q%3Dhttps://drive.google.com/drive/folders/12dUcpCBEpfHUpnepbFd_1DXtzJRQXP-Q?usp%253Dsharing%26sa%3DD%26source%3Deditors%26ust%3D1729329535684853%26usg%3DAOvVaw1ap8r4jml80vlR9Xwdjqxf&sa=D&source=editors&ust=1754667510895690&usg=AOvVaw3_IXBTigvG95c82r86oJyn" target="_blank">Tổng ôn Ngữ Văn lớp 12 tập 2</a></li>
+                            <li><a href="https://www.google.com/url?q=https://www.google.com/url?q%3Dhttps://drive.google.com/drive/folders/1jwxXcPyLWCrU63QJUZaF_dDMd2PYenYH?usp%253Ddrive_link%26sa%3DD%26source%3Deditors%26ust%3D1729329535683655%26usg%3DAOvVaw2eF0P39QPovoJOdwFYrJPY&sa=D&source=editors&ust=1754667510895092&usg=AOvVaw3zke9rWLNi4iY1EpnjE7l8" target="_blank">Tổng ôn Địa Lý lớp 12 tập 1</a></li>
+                            <li><a href="https://www.google.com/url?q=https://www.google.com/url?q%3Dhttps://drive.google.com/drive/u/1/folders/1RJzGp0Qoa3AGMSjPKE_qz6vaReT9_nvG%26sa%3DD%26source%3Deditors%26ust%3D1729329535684078%26usg%3DAOvVaw0wYrHKvlkmXUaB7bgGZkR4&sa=D&source=editors&ust=1754667510895341&usg=AOvVaw1y05FF_fdHtxIkHgj7TpvW" target="_blank">Tổng ôn Địa Lý lớp 12 tập 2 (đọc thử)</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="collapsible-section">
+                        <h3 class="collapsible-header">Tài liệu Tiếng Anh</h3>
+                        <ul class="link-list collapsible-content">
+                            <li><a href="https://www.google.com/url?q=https://www.google.com/url?q%3Dhttps://drive.google.com/drive/folders/1tsMGwd4sBtP0cmXkmRqQrzsNJ0dqL0Ad?usp%253Ddrive_link%26sa%3DD%26source%3Deditors%26ust%3D1729329535685987%26usg%3DAOvVaw0dpV9vjmz2GoWThMBFERxs&sa=D&source=editors&ust=1754667510896255&usg=AOvVaw1KxoN5Wn3m4x4Ou5FKaqoP" target="_blank">Tiếng Anh cho người bắt đầu</a></li>
+                            <li><a href="https://www.google.com/url?q=https://www.google.com/url?q%3Dhttps://drive.google.com/drive/folders/1qLxC5CDAHbOvLMIQUikPJx8VbGJ43Hml?usp%253Ddrive_link%26sa%3DD%26source%3Deditors%26ust%3D1729329535686343%26usg%3DAOvVaw3lk4S35kuGsjSR3HOv0X3t&sa=D&source=editors&ust=1754667510896426&usg=AOvVaw08ZhKhDc11CJbFWoTiORes" target="_blank">Tổng ôn Ngữ Pháp Tiếng Anh</a></li>
+                            <li><a href="https://www.google.com/url?q=https://www.google.com/url?q%3Dhttps://drive.google.com/drive/folders/1mXHAQTSa5bBgWh8ma7OGIuOZiUAXUdq-?usp%253Ddrive_link%26sa%3DD%26source%3Deditors%26ust%3D1729329535686682%26usg%3DAOvVaw3LbTOvrn4OmFTNN0AkFtAZ&sa=D&source=editors&ust=1754667510896587&usg=AOvVaw0YBl6oHyz3xmtqfxfKN7Ez" target="_blank">Tổng ôn Cấp tốc Tiếng Anh</a></li>
+                            <li><a href="https://www.google.com/url?q=https://www.google.com/url?q%3Dhttps://drive.google.com/drive/folders/1B6GyKsa4THnmF658uE_Jda4h-dJo38Ge?usp%253Dsharing%26sa%3DD%26source%3Deditors%26ust%3D1729329535687036%26usg%3DAOvVaw2jtd1Mo3oT4aZgdO_Fn-dv&sa=D&source=editors&ust=1754667510896759&usg=AOvVaw1RHo88nt63NYHF91Cs2U9M" target="_blank">Tổng ôn từ vựng tiếng Anh tập 2</a></li>
+                    </ul>
+
+                        </ul>
+                    </div>
+                    
+                    <div class="collapsible-section">
+                        <h3 class="collapsible-header">Tài liệu DGNl (Đánh giá năng lực)</h3>
+                        <ul class="link-list collapsible-content">
+                            <li><a href="https://www.google.com/url?q=https://www.google.com/url?q%3Dhttps://drive.google.com/drive/folders/1SpyVJ_Ykf3gLcTmSWO7wwyxeD3PaveY8?usp%253Dsharing%26sa%3DD%26source%3Deditors%26ust%3D1729329535687698%26usg%3DAOvVaw2NTHeau3hVYJdaiY5Y_Wxu&sa=D&source=editors&ust=1754667510897083&usg=AOvVaw1Ux6PaMXty3VoK6I6POkb6" target="_blank">Tổng ôn toán học và xử lý số hiệu(dgnl Hà Nội)</a></li>
+                            <li><a href="https://www.google.com/url?q=https://www.google.com/url?q%3Dhttps://drive.google.com/drive/u/1/folders/1GlDcK6tRBAQjPeT4cKPxdO6T3CxXoqDQ%26sa%3DD%26source%3Deditors%26ust%3D1729329535688693%26usg%3DAOvVaw1Vafx2u_VlYMMX2T79opCW&sa=D&source=editors&ust=1754667510897621&usg=AOvVaw3W3CNEpAZU09ubJAcBt0Ka" target="_blank">Chuyên Đề Trong Tâm Ôn Thi DGNl HSA Khoa Học Tự Nhiên</a></li>
+                            <li><a href="https://www.google.com/url?q=https://www.google.com/url?q%3Dhttps://drive.google.com/drive/u/1/folders/1iPJ0e5NXgg3yGPmsccLyPzj7hSkpMA3v%26sa%3DD%26source%3Deditors%26ust%3D1729329535689047%26usg%3DAOvVaw3GD9lIi8_YFsvwgeHgU_UG&sa=D&source=editors&ust=1754667510897796&usg=AOvVaw03eUUV4hfX5NvKM8_MlC5_" target="_blank">Chuyên Đề Trong Tâm Ôn Thi DGNl HSA Khoa Học Xã Hội</a></li>
+                            <li><a href="https://www.google.com/url?q=https://www.google.com/url?q%3Dhttps://drive.google.com/drive/u/1/folders/1ReUkeO7zkxzSmT8fzqqxLdlPFNZ7hfZA%26sa%3DD%26source%3Deditors%26ust%3D1729329535689386%26usg%3DAOvVaw2cgSaaG0hd614BOGLAjPNL&sa=D&source=editors&ust=1754667510897964&usg=AOvVaw0LugTlFdnPchXzoA84U-Ip" target="_blank">Chuyên Đề Trong Tâm Ôn Thi DGNl HSA Phần Định Tính</a></li>
+                            <li><a href="https://www.google.com/url?q=https://www.google.com/url?q%3Dhttps://drive.google.com/drive/u/1/folders/1Em83yS2jZBTMNpt3-3pmmkAHa7Iv4QvL%26sa%3DD%26source%3Deditors%26ust%3D1729329535689721%26usg%3DAOvVaw0ZNCD6IUV_qj9mW8W7boBF&sa=D&source=editors&ust=1754667510898130&usg=AOvVaw1C9o8p5gMzCaKbduSGioVy" target="_blank">Chuyên Đề Trong Tâm Ôn Thi DGNl HSA Phần Định Lượng</a></li>
+                            <li><a href="https://www.google.com/url?q=https://www.google.com/url?q%3Dhttps://drive.google.com/drive/u/1/folders/17tKedfqEREna2JZd_sU7BYPh3gOhuOV_%26sa%3DD%26source%3Deditors%26ust%3D1729329535690049%26usg%3DAOvVaw1pMIn5jWwU-54hFN3RBEFl&sa=D&source=editors&ust=1754667510898318&usg=AOvVaw0ZFwX79VZxWQlGQ33JfKyS" target="_blank">Chuyên Đề Trong Tâm Ôn Thi DGNl HSA Phần Tiếng Anh</a></li>
+                            <li><a href="https://www.google.com/url?q=https://www.google.com/url?q%3Dhttps://drive.google.com/drive/u/1/folders/1q6VR3aVLDal43tFVQqlvppawpVb4a6j3%26sa%3DD%26source%3Deditors%26ust%3D1729329535688030%26usg%3DAOvVaw1IR0B5vQrD99ewKxshnpuq&sa=D&source=editors&ust=1754667510897254&usg=AOvVaw3ofJhHqcZ8UvSpHC1OgSID" target="_blank">Tổng ôn phần đọc hiểu(dgnl Hà Nội)</a></li>
+                            <li><a href="https://www.google.com/url?q=https://www.google.com/url?q%3Dhttps://drive.google.com/drive/u/1/folders/15NYVOo6dWcfw4vBc1z_GZi6JVIttGwQf%26sa%3DD%26source%3Deditors%26ust%3D1729329535688363%26usg%3DAOvVaw3jk43bR11_yeZjq5nH-ca6&sa=D&source=editors&ust=1754667510897431&usg=AOvVaw38lwMQlqNkTgOn0jorfEl1" target="_blank">Tổng ôn phần tư duy logic(dgnl HCM)</a></li>
+                            <li><a href="https://www.google.com/url?q=https://www.google.com/url?q%3Dhttps://drive.google.com/drive/u/1/folders/1zsPr5D7xsmduHwAI2R8GGJOEi8k60R8x%26sa%3DD%26source%3Deditors%26ust%3D1729329535691351%26usg%3DAOvVaw378aRH0V6hyz3B63ghdbgc&sa=D&source=editors&ust=1754667510898840&usg=AOvVaw3zcxj8xSumKsRpYEVwzaI_" target="_blank">550 bài đọc hiểu - đọc diễn Tiếng Anh</a></li>
+                            <li><a href="https://www.google.com/url?q=https://drive.google.com/drive/folders/1p4ZztSIOIoW5OyNZCVHKELbppYRSpoD0?usp%3Ddrive_link&sa=D&source=editors&ust=1754667510899763&usg=AOvVaw0QHzNw1j2tGj-ln6zxqk6-" target="_blank">Sổ tay ngữ văn (Tư duy NLXH và 60 tác giả Việt Nam) - Toán</a></li>
+                            <li><a href="https://www.google.com/url?q=https://drive.google.com/drive/folders/1_CIlxtf5zZ7Jyygs2As1mWrhDNI1-uFA?usp%3Ddrive_link&sa=D&source=editors&ust=1754667510899966&usg=AOvVaw2WJmQtqfY8839O6dEyyS4N" target="_blank">C333 câu hỏi Tiếng Anh (HSA) (Phần Tư duy logic và giải quyết vấn đề)</a></li>
+                            <li><a href="https://www.google.com/url?q=https://drive.google.com/drive/folders/1M3KStPql3BVPkypXaIA6_keCqgHqsRPy?usp%3Ddrive_link&sa=D&source=editors&ust=1754667510900175&usg=AOvVaw1qQ533i2beL_yy3CqPGx-d" target="_blank">Bộ đề ôn thi DGNl Tiếng Anh (Form: HSA, APT, DGNl ĐH Sư Phạm)</a></li>
+                            <li><a href="https://www.google.com/url?q=https://drive.google.com/drive/folders/1PYtiiUvV9qNPBOIL2efoAb_D68rJ1Jyb?usp%3Ddrive_link&sa=D&source=editors&ust=1754667510900508&usg=AOvVaw1Jpj3XiurdoYxDfoYKikO-" target="_blank">Tổng ôn phần Khoa học môn Sinh học (HSA)</a></li>
+                            <li><a href="https://www.google.com/url?q=https://drive.google.com/drive/folders/1nGo6aQ4aguuj-LyoI4WcGF8jO0LHRTDe?usp%3Ddrive_link&sa=D&source=editors&ust=1754667510900693&usg=AOvVaw191AgK1X9hm0fMVS-tEpSo" target="_blank">Tổng ôn phần ngữ văn - văn học (HSA)</a></li>
+                            <li><a href="https://www.google.com/url?q=https://drive.google.com/drive/folders/1sLUzx6g-xIQ32Fexgu6cGWbXUOEcpOeM?usp%3Ddrive_link&sa=D&source=editors&ust=1754667510900857&usg=AOvVaw2BSgBdsHRPX_FF9NRoN8He" target="_blank">Tổng ôn phần Khoa học môn Địa lý (HSA)</a></li>
+                            <li><a href="https://www.google.com/url?q=https://drive.google.com/drive/folders/1Zxc-YBGRI-ZKB0Fjn1hTP3Gx8Yu6gp7P?usp%3Ddrive_link&sa=D&source=editors&ust=1754667510901514&usg=AOvVaw0tei-eiYxHPQWfJaG9GAp7" target="_blank">Tổng Ôn Moon-TSA Phần Giải Quyết Vấn Đề - Sinh Học</a></li>
+                        </ul>
+                    </div>
+                `;
+                setupCollapsibles();
+            }
+        }
+
+        document.getElementById('homeLink').addEventListener('click', function(event) {
+            event.preventDefault();
+            showPage('home');
+        });
+        document.getElementById('profileLink').addEventListener('click', function(event) {
+            event.preventDefault();
+            showPage('profile');
+        });
+        document.getElementById('onlineLink').addEventListener('click', function(event) {
+            event.preventDefault();
+            showPage('online');
+        });
+
+        function setupCollapsibles() {
+            let headers = document.querySelectorAll('.collapsible-header');
+            headers.forEach(header => {
+                header.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    let content = this.nextElementSibling;
+                    if (content.style.maxHeight) {
+                        content.style.maxHeight = null;
+                    } else {
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                    }
+                });
+            });
+        }
+    </script>
 </body>
 </html>
